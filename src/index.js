@@ -106,6 +106,30 @@ class OtterApi {
     return data.hits;
   };
 
+  /**
+   *
+   * @param {*} query A string. i.e. "test"
+   * @param {*} begin_date A number -- date in Unix Epoch. i.e. 1665298800
+   * @returns
+   */
+  advancedSpeechSearch = async (query, begin_date) => {
+    if (query === '') {
+      query = undefined
+    }
+    const { data } = await axios({
+      method: 'GET',
+      url: `${API_BASE_URL}/advanced_search`,
+      params: {
+        query,
+        begin_date,
+        userid: this.user.id,
+        appid: "otter-web"
+      },
+    });
+
+    return data.hits;
+  };
+
   validateUploadService = () =>
     axios({
       method: 'OPTIONS',
